@@ -1,0 +1,199 @@
+/* src/app/footer/footer.component.scss */
+
+// --- Footer Constants ---
+$footer-bg-light: #002b59; // Deep Navy Blue (Official Look for Light Mode)
+$footer-bg-dark: #020617;  // Pitch Black/Navy (For Dark Mode)
+$text-light: #d1d8e0;      // Light Blue-Grey text
+
+.footer {
+  background-color: $footer-bg-light; // Default (Light Mode)
+  color: $text-light;
+  padding: 70px 0 20px;
+  position: relative;
+  transition: background-color 0.3s ease;
+  
+  // Theme Red Top Border (Uses Variable)
+  border-top: 5px solid var(--accent); 
+  font-family: 'Montserrat', sans-serif;
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  .footer-content {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr 1.2fr;
+    gap: 40px;
+    margin-bottom: 50px;
+
+    @media (max-width: 992px) { grid-template-columns: 1fr 1fr; }
+    @media (max-width: 576px) { grid-template-columns: 1fr; }
+  }
+
+  // --- Typography ---
+  .footer-heading {
+    color: #ffffff;
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .footer-subheading {
+    color: #ffffff;
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
+    position: relative;
+    padding-bottom: 10px;
+
+    // Red Underline using Theme Variable
+    &::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      width: 40px;
+      height: 3px;
+      background: var(--accent);
+    }
+  }
+
+  // --- Secretary Info ---
+  .secretary-info {
+    margin-bottom: 20px;
+    .name {
+      color: #ffffff;
+      font-weight: 700;
+      font-size: 1.1rem;
+      margin: 0;
+    }
+    .designation {
+      color: #74b9ff; // Light Blue always pops on dark bg
+      font-size: 0.9rem;
+      margin-bottom: 5px;
+      font-weight: 500;
+    }
+    .sub-text {
+      font-size: 0.85rem;
+      opacity: 0.8;
+    }
+  }
+
+  // --- Social Icons ---
+  .social-links {
+    display: flex;
+    gap: 15px;
+    
+    .social-icon {
+      width: 40px;
+      height: 40px;
+      background: rgba(255,255,255,0.1);
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      border-radius: 4px;
+      font-weight: bold;
+      font-size: 0.8rem;
+      transition: all 0.3s ease;
+
+      &:hover {
+        background: var(--accent); // Theme Red
+        color: #ffffff;
+        transform: translateY(-3px);
+      }
+    }
+  }
+
+  // --- Links List ---
+  .footer-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+
+    li { margin-bottom: 12px; }
+
+    .link-item {
+      color: $text-light;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      display: inline-block;
+
+      &:hover {
+        color: #ffffff;
+        transform: translateX(5px);
+        // Optional: Make text blue on hover to match theme
+        // color: var(--primary-light); 
+      }
+    }
+
+    &.non-clickable {
+      li {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        color: $text-light;
+        
+        .dot {
+          width: 6px;
+          height: 6px;
+          background-color: var(--accent); // Theme Red Dots
+          border-radius: 50%;
+          display: inline-block;
+        }
+      }
+    }
+  }
+
+  // --- Contact Section ---
+  .contact-section {
+    .info-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 15px;
+      margin-bottom: 15px;
+
+      .icon {
+        width: 20px;
+        height: 20px;
+        min-width: 20px;
+        stroke: #ffffff;
+        margin-top: 3px;
+      }
+
+      p {
+        margin: 0;
+        line-height: 1.5;
+        font-size: 0.95rem;
+      }
+    }
+  }
+
+  // --- Bottom Bar ---
+  .footer-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 25px;
+    text-align: center;
+    font-size: 0.9rem;
+
+    p { margin: 0; opacity: 0.8; }
+
+    .brand-highlight {
+      color: #ffffff;
+      font-weight: 600;
+    }
+  }
+}
+
+// --- DARK THEME OVERRIDE ---
+// Jab "Dark Mode" on hoga, footer ka background change ho jayega
+:host-context(body.dark-theme) .footer {
+  background-color: $footer-bg-dark; // Darker shade for Dark Mode
+  border-top-color: var(--accent);
+}

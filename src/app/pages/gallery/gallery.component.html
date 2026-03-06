@@ -1,0 +1,161 @@
+<section class="page-header">
+  <div class="header-overlay"></div>
+  <div class="header-bg"></div>
+  
+  <div class="container header-content fade-in-up">
+    
+    <div class="auth-corner">
+      <div *ngIf="currentUser" class="user-profile">
+        <span class="welcome-text">Hi, {{ currentUser.user_data?.user_name }}</span>
+        
+        <button *ngIf="permissions.upload" class="btn-action upload" (click)="openUploadModal()">
+          <span class="icon">☁️</span> Upload
+        </button>
+
+        <button class="btn-logout" (click)="logout()">Logout</button>
+      </div>
+
+      <button *ngIf="!currentUser" class="btn-login" (click)="openLoginModal()">
+        <span class="icon">🔒</span> Login
+      </button>
+    </div>
+
+    <h1>Our <span class="text-highlight">Gallery</span></h1>
+    <p>Witness the discipline, energy, and spirit of our academy.</p>
+  </div>
+</section>
+
+<section class="section gallery-section">
+  <div class="container">
+    
+    <div class="gallery-filters fade-in-up">
+      <button class="filter-btn" [class.active]="currentFilter === 'all'" (click)="filterImages('all')">All</button>
+      <button class="filter-btn" [class.active]="currentFilter === 'Training'" (click)="filterImages('Training')">Training</button>
+      <button class="filter-btn" [class.active]="currentFilter === 'Events'" (click)="filterImages('Events')">Events</button>
+      <button class="filter-btn" [class.active]="currentFilter === 'Facilities'" (click)="filterImages('Facilities')">Facilities</button>
+      
+      <!-- Upload Button (Show only if user has upload permission) -->
+      <button *ngIf="currentUser && permissions.upload" class="filter-btn upload-filter-btn" (click)="openUploadModal()" title="Upload new media">
+        <span class="icon">⬆️</span> Upload
+      </button>
+    </div>
+
+    <div class="gallery-grid">
+      <div class="gallery-item" *ngFor="let item of visibleImages; let i = index" #animItem [class.video-item]="item.type === 'video'">
+        <div class="image-wrapper">
+          <!-- IMAGE DISPLAY -->
+          <div *ngIf="item.type === 'image'" class="img" [style.background-image]="'url(' + item.image + ')'"></div>
+          
+          <!-- VIDEO DISPLAY -->
+          <div *ngIf="item.type === 'video'" class="video-container">
+            <video class="video-preview" [src]="item.image" controls></video>
+            <div class="video-badge">🎥 VIDEO</div>
+          </div>
+          
+          <div class="overlay">
+            <div class="content">
+              <span class="category-badge">{{ item.category }}</span>
+              <h3>{{ item.title }}</h3>
+              <p class="desc-text">{{ item.description }}</p>
+            </div>
+          </div>
+
+          <div class="admin-actions" *ngIf="currentUser">
+            <button *ngIf="permissions.edit" class="action-btn edit" (click)="editItem(i)" title="Edit">✏️</button>
+            <button *ngIf="permissions.delete" class="action-btn delete" (click)="deleteItem(i)" title="Delete">🗑️</button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="visibleImages.length === 0" class="empty-state">
+      <p>No images found in this category.</p>
+    </div>
+
+  </div>
+</section>
+
+<div class="login-modal" [class.active]="isLoginOpen">
+  <div class="modal-backdrop" (click)="closeLoginModal()"></div>
+  <div class="modal-content small-modal">
+    <div class="modal-header">
+      <h3>Admin Login</h3>
+      <button class="close-btn" (click)="closeLoginModal()">×</button>
+    </div>
+    <div class="modal-body">
+      <p *ngIf="errorMessage" class="error-msg">{{ errorMessage }}</p>
+      <form (ngSubmit)="onLoginSubmit()">
+        <div class="form-group">
+          <label>Username</label>
+          <input type="text" [(ngModel)]="loginData.user_name" name="user_name" required class="form-control">
+        </div>
+        <div class="form-group">
+          <label>Password</label>
+          <input type="password" [(ngModel)]="loginData.password" name="password" required class="form-control">
+        </div>
+        <button type="submit" class="btn-submit" [disabled]="isLoading">
+          {{ isLoading ? 'Checking...' : 'Login' }}
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div class="login-modal" [class.active]="isUploadOpen">
+  <div class="modal-backdrop" (click)="closeUploadModal()"></div>
+  <div class="modal-content medium-modal">
+    <div class="modal-header">
+      <h3>Upload Media</h3>
+      <button class="close-btn" (click)="closeUploadModal()">×</button>
+    </div>
+    <div class="modal-body">
+      <form (ngSubmit)="onUploadSubmit()">
+        
+        <div class="form-row">
+          <div class="form-group full-width">
+            <label>Type</label>
+            <select [(ngModel)]="uploadData.type" name="type" class="form-control" (change)="onUploadTypeChange()">
+              <option value="image">Image</option>
+              <option value="video">Video</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- IMAGE/VIDEO FIELDS -->
+        <div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>Category</label>
+              <select [(ngModel)]="uploadData.category" name="category" class="form-control">
+                <option value="Training">Training</option>
+                <option value="Events">Events</option>
+                <option value="Facilities">Facilities</option>
+              </select>
+            </div>
+            
+            <div class="form-group">
+              <label>Title</label>
+              <input type="text" [(ngModel)]="uploadData.title" name="title" required class="form-control" placeholder="Enter title">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Description</label>
+            <textarea [(ngModel)]="uploadData.description" name="description" rows="3" class="form-control" placeholder="Enter description"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label>{{ uploadData.type === 'image' ? 'Image File' : 'Video File' }}</label>
+            <input type="file" (change)="onFileSelected($event)" required class="form-control file-input" 
+                   [accept]="uploadData.type === 'image' ? 'image/*' : 'video/*'">
+          </div>
+        </div>
+
+        <button type="submit" class="btn-submit" [disabled]="isLoading">
+          {{ isLoading ? 'Uploading...' : 'Upload Now' }}
+        </button>
+      </form>
+    </div>
+  </div>
+</div>

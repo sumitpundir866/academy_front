@@ -1,0 +1,192 @@
+/* Header Base */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 1rem 0;
+  z-index: 1000;
+  transition: all 0.3s ease;
+  
+  /* --- INITIAL STATE (Without Scroll) --- */
+  background: var(--nav-bg-initial); 
+  border-bottom: var(--nav-border-initial);
+  backdrop-filter: blur(8px); 
+
+  /* Text Colors using Variables */
+  .logo-text, .nav-link, .theme-toggle {
+    color: var(--nav-text-initial) !important;
+  }
+  
+  .nav-toggle .bar {
+    background: var(--nav-text-initial) !important;
+  }
+
+  /* CTA Button Initial */
+  .cta-btn {
+    border-color: var(--nav-text-initial);
+    color: var(--nav-text-initial);
+  }
+
+  /* --- SCROLLED STATE --- */
+  &.scrolled {
+    padding: 0.6rem 0;
+    background: var(--nav-bg-scrolled); 
+    box-shadow: var(--nav-shadow);
+    backdrop-filter: blur(12px);
+    border-bottom: none;
+
+    /* Scrolled Text Colors */
+    .logo-text, .nav-link, .theme-toggle {
+      color: var(--nav-text-scrolled) !important;
+    }
+    
+    .nav-toggle .bar {
+      background: var(--nav-text-scrolled) !important;
+    }
+
+    .logo-image { height: 50px; } 
+
+    /* CTA Button Scrolled */
+    .cta-btn {
+      border-color: var(--primary);
+      color: var(--primary);
+      &:hover { background: var(--primary); color: #fff; }
+    }
+  }
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Logo Styling */
+.nav-brand {
+  z-index: 1002;
+  .brand-link {
+    text-decoration: none;
+    .logo-container { display: flex; align-items: center; }
+    
+    .logo-image {
+      height: 70px;
+      width: auto;
+      transition: all 0.3s ease;
+    }
+    
+    .logo-text {
+      font-size: 1.6rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      margin-left: 10px;
+      font-family: 'Oswald', sans-serif;
+      .highlight { color: var(--accent); }
+    }
+  }
+}
+
+/* Menu Styling */
+.nav-menu {
+  display: flex; align-items: center; gap: 2rem;
+
+  .nav-list {
+    display: flex; list-style: none; margin: 0; padding: 0; gap: 2.5rem;
+  }
+
+  .nav-link {
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    position: relative;
+    font-family: 'Montserrat', sans-serif;
+    transition: color 0.3s ease;
+
+    &::after {
+      content: ''; position: absolute; bottom: -5px; left: 0; width: 0; height: 3px;
+      background: var(--primary); transition: width 0.3s ease;
+    }
+
+    &:hover::after, &.active::after { width: 100%; }
+  }
+}
+
+/* Hover Color Logic */
+.header .nav-link:hover {
+  color: var(--primary) !important;
+}
+
+/* Theme Toggle */
+.theme-toggle {
+  background: none; border: none; cursor: pointer; padding: 5px;
+  display: flex; align-items: center; justify-content: center;
+  transition: transform 0.3s ease;
+
+  &:hover {
+    transform: rotate(15deg) scale(1.1);
+    color: var(--accent) !important;
+  }
+  .icon { width: 22px; height: 22px; }
+}
+
+/* CTA Button */
+.cta-container { margin-left: 1rem; }
+
+.cta-btn {
+  display: inline-block; padding: 10px 28px;
+  background: transparent;
+  border-width: 2px; border-style: solid;
+  font-weight: 700; text-transform: uppercase; text-decoration: none;
+  transition: all 0.3s ease; border-radius: 4px;
+  font-family: 'Oswald', sans-serif; letter-spacing: 1px;
+
+  &:hover {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: #fff !important;
+    transform: translateY(-2px);
+  }
+}
+
+/* Mobile & Hamburger */
+.nav-toggle {
+  display: none; flex-direction: column; cursor: pointer; z-index: 1002; gap: 6px;
+  .bar { width: 28px; height: 3px; border-radius: 2px; transition: 0.3s; }
+}
+
+.mobile-only { display: none; }
+
+@media (max-width: 992px) {
+  .nav-menu {
+    position: fixed; top: 0; right: -100%; width: 100%; height: 100vh;
+    background: var(--bg-body); 
+    flex-direction: column; justify-content: center; align-items: center;
+    transition: 0.4s ease; box-shadow: -10px 0 30px rgba(0,0,0,0.2);
+
+    &.active { right: 0; }
+    .nav-list { flex-direction: column; text-align: center; gap: 2rem; }
+    
+    .nav-link { font-size: 1.5rem; font-weight: 700; color: var(--text-main) !important; }
+    .theme-toggle { color: var(--text-main) !important; transform: scale(1.5); margin-top: 20px; }
+  }
+
+  .cta-container { display: none; }
+  .mobile-only { display: block; }
+
+  .nav-toggle {
+    display: flex;
+    &.active {
+      .bar { background: var(--text-main) !important; }
+      .bar:nth-child(1) { transform: translateY(9px) rotate(45deg); }
+      .bar:nth-child(2) { opacity: 0; }
+      .bar:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
+    }
+  }
+}

@@ -1,0 +1,228 @@
+// --- Animation Base ---
+.fade-in-up { opacity: 0; transform: translateY(30px); transition: all 0.8s ease-out; }
+.visible .fade-in-up, .visible.fade-in-up { opacity: 1; transform: translateY(0); }
+
+// --- 1. PAGE HEADER ---
+.page-header {
+  position: relative; height: 350px;
+  display: flex; align-items: center; justify-content: center;
+  text-align: center; color: #fff; background-color: #000; overflow: hidden;
+
+  .header-bg {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    background-image: url('../../../assets/hero-bg.jpg'); 
+    background-size: cover; background-position: center; opacity: 0.6;
+    animation: zoomEffect 20s infinite alternate;
+  }
+  .header-overlay {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    background: linear-gradient(to bottom, rgba(0, 43, 89, 0.7), rgba(0,0,0,0.9)); z-index: 1;
+  }
+  .header-content {
+    position: relative; z-index: 2;
+    h1 { font-size: 3.5rem; font-weight: 800; text-transform: uppercase; margin-bottom: 10px; font-family: 'Oswald', sans-serif; }
+    p { font-size: 1.2rem; opacity: 0.9; letter-spacing: 1px; }
+    .text-highlight { color: var(--primary); background: #fff; padding: 0 10px; clip-path: polygon(10% 0, 100% 0, 90% 100%, 0% 100%); display: inline-block; }
+  }
+}
+
+// --- 2. TEAM GRID (HERO STYLE) ---
+.team-section {
+  background-color: var(--bg-body); padding: 100px 0;
+}
+
+.team-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+  gap: 40px;
+}
+
+.team-card {
+  position: relative;
+  height: 450px; // Tall Portrait Card
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: var(--shadow-soft);
+  cursor: pointer;
+  background: #000;
+  
+  // Animation state
+  opacity: 0; transform: translateY(30px);
+  &.visible { opacity: 1; transform: translateY(0); transition: all 0.6s ease; }
+
+  // 1. Background Image
+  .card-img {
+    width: 100%; height: 100%;
+    background-size: cover; background-position: center top;
+    transition: transform 0.6s ease;
+  }
+
+  // 2. Overlay (Dark at bottom)
+  .card-overlay {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    background: linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.7) 40%, transparent 100%);
+    z-index: 1;
+    transition: opacity 0.3s;
+  }
+
+  // 3. Social Bar (Top Right)
+  .social-bar {
+    position: absolute; top: 20px; right: 20px; z-index: 10;
+    display: flex; flex-direction: column; gap: 10px;
+    opacity: 0; transform: translateX(20px); transition: 0.4s ease;
+
+    .s-icon {
+      width: 40px; height: 40px; background: rgba(255,255,255,0.2); 
+      backdrop-filter: blur(5px); color: #fff; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      text-decoration: none; font-size: 0.8rem; font-weight: 700; transition: 0.3s;
+      
+      &:hover { background: var(--primary); transform: scale(1.1); }
+    }
+  }
+
+  // 4. Content Area
+  .card-content {
+    position: absolute; bottom: 0; left: 0; width: 100%; padding: 30px 25px;
+    z-index: 5;
+    
+    .role-badge {
+      display: inline-block; background: var(--accent); color: #fff;
+      padding: 5px 12px; font-size: 0.75rem; text-transform: uppercase;
+      font-weight: 700; border-radius: 4px; margin-bottom: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    }
+
+    h3 {
+      color: #fff; font-size: 1.8rem; font-family: 'Oswald', sans-serif;
+      margin: 0 0 15px 0; text-transform: uppercase; letter-spacing: 0.5px;
+    }
+
+    .stats-row {
+      display: flex; gap: 20px; margin-bottom: 15px;
+      border-top: 1px solid rgba(255,255,255,0.2);
+      border-bottom: 1px solid rgba(255,255,255,0.2);
+      padding: 10px 0;
+
+      .stat {
+        display: flex; flex-direction: column;
+        small { color: rgba(255,255,255,0.6); font-size: 0.7rem; text-transform: uppercase; }
+        strong { color: #fff; font-size: 0.9rem; }
+      }
+    }
+
+    .bio {
+      color: rgba(255,255,255,0.8); font-size: 0.9rem; line-height: 1.5;
+      margin: 0; max-height: 0; opacity: 0; overflow: hidden; // Hidden initially
+      transition: all 0.4s ease;
+    }
+  }
+
+  // --- HOVER EFFECTS ---
+  &:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+
+    .card-img { transform: scale(1.1); } // Zoom BG
+    .social-bar { opacity: 1; transform: translateX(0); } // Show Socials
+    
+    // Expand Bio
+    .card-content {
+      .bio { max-height: 100px; opacity: 1; margin-top: 10px; }
+    }
+  }
+}
+
+// --- AUTH CORNER ---
+.auth-corner {
+  position: fixed; top: 100px; right: 20px; z-index: 100;
+  
+  .btn-upload {
+    background: linear-gradient(135deg, #28a745, #20c997);
+    color: #fff; border: none;
+    padding: 10px 20px; border-radius: 20px; cursor: pointer; font-weight: 600;
+    display: flex; align-items: center; gap: 5px; transition: 0.3s;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    
+    &:hover { 
+      background: linear-gradient(135deg, #218838, #1aa179);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 15px rgba(40, 167, 69, 0.4);
+    }
+    
+    .icon { font-size: 1.1rem; }
+  }
+}
+
+.team-card {
+  .btn-delete {
+    background: #dc3545; color: #fff; border: none;
+    padding: 8px 12px; border-radius: 4px; cursor: pointer; font-size: 0.85rem;
+    font-weight: 600; margin-top: 12px; width: 100%; transition: 0.3s;
+    
+    &:hover { 
+      background: #c82333;
+      transform: translateY(-2px);
+    }
+  }
+}
+
+// --- UPLOAD MODAL ---
+.upload-modal {
+  position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 2000;
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; visibility: hidden; transition: 0.3s;
+
+  &.active { opacity: 1; visibility: visible; }
+
+  .modal-backdrop {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.6); backdrop-filter: blur(5px);
+  }
+
+  .modal-content {
+    position: relative; background: #fff; width: 90%; max-width: 450px;
+    border-radius: 12px; overflow: hidden; box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+    animation: slideIn 0.3s forwards;
+  }
+
+  .modal-header {
+    background: var(--primary); color: #fff; padding: 20px;
+    display: flex; justify-content: space-between; align-items: center;
+    h3 { margin: 0; font-family: 'Oswald', sans-serif; font-size: 1.2rem; }
+    .close-btn { background: none; border: none; color: #fff; font-size: 1.5rem; cursor: pointer; }
+  }
+
+  .modal-body {
+    padding: 25px;
+    
+    .form-group { margin-bottom: 15px; }
+    
+    label { display: block; margin-bottom: 5px; font-weight: 600; font-size: 0.9rem; color: #333; }
+    
+    .form-control {
+      width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 6px; font-size: 0.95rem;
+      &:focus { outline: none; border-color: var(--primary); }
+    }
+    
+    .file-input { padding: 8px; border: 1px dashed #999; background: #f9f9f9; }
+
+    .btn-submit {
+      width: 100%; padding: 12px; background: var(--primary); color: #fff; font-weight: 700;
+      border: none; border-radius: 6px; cursor: pointer; margin-top: 10px;
+      &:disabled { opacity: 0.6; cursor: not-allowed; }
+      &:hover:not(:disabled) { background: #004494; }
+    }
+  }
+}
+
+@keyframes slideIn { from { transform: translateY(20px); } to { transform: translateY(0); } }
+
+// --- 3. CTA SECTION ---
+.cta-section {
+  background-color: var(--primary); padding: 80px 0; text-align: center; color: #fff;
+  .cta-title { font-size: 2.5rem; font-weight: 800; margin-bottom: 15px; text-transform: uppercase; }
+  .text-large { font-size: 1.2rem; margin-bottom: 30px; opacity: 0.9; }
+  .btn-white { background: #fff; color: var(--primary); padding: 15px 40px; border-radius: 4px; font-weight: 700; text-decoration: none; transition: 0.3s; &:hover { background: #eee; transform: translateY(-2px); } }
+}
+
+@keyframes zoomEffect { 0% { transform: scale(1); } 100% { transform: scale(1.1); } }

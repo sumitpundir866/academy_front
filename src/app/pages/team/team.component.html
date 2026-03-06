@@ -1,0 +1,113 @@
+<!-- <section class="page-header parallax-section" data-aos="fade-up">
+  <div class="parallax-bg" style="background-image: url('assets/team-karate-bg.jpg');"></div>
+  <div class="header-overlay"></div>
+  <div class="container header-content fade-in-up">
+    <h1 class="glitch" data-text="Our Team">Our <span class="text-highlight">Team</span></h1>
+    <p class="fade-in-up">Meet the masters forging the next generation of champions.</p>
+  </div>
+</section> -->
+
+<section class="section team-section">
+  <!-- Auth Corner - Outside container for visibility -->
+  <div class="auth-corner">
+    <button *ngIf="currentUser && permissions.upload" class="btn-upload" (click)="openUploadModal()" title="Add team member">
+      <span class="icon">➕</span> Add Member
+    </button>
+  </div>
+  
+  <div class="container">
+    <div class="team-grid">
+      <div class="team-card" *ngFor="let member of teamMembers; let i = index" #animItem [style.transition-delay]="i * 100 + 'ms'">
+        
+        <div class="card-img" [style.background-image]="'url(' + member.image + ')'"></div>
+        
+        <div class="card-overlay"></div>
+
+        <div class="social-bar">
+          <a href="#" class="s-icon">FB</a>
+          <a href="#" class="s-icon">IG</a>
+          <a href="#" class="s-icon">IN</a>
+        </div>
+
+        <div class="card-content">
+          <span class="role-badge">{{ member.role }}</span>
+          <h3>{{ member.name }}</h3>
+          
+          <div class="stats-row" *ngIf="member.experience && member.specialization">
+            <div class="stat">
+              <small>Experience</small>
+              <strong>{{ member.experience }}</strong>
+            </div>
+            <div class="stat">
+              <small>Expertise</small>
+              <strong>{{ member.specialization }}</strong>
+            </div>
+          </div>
+
+          <p class="bio">{{ member.bio }}</p>
+
+          <!-- Delete Button -->
+          <button *ngIf="currentUser && permissions.delete && member.id" 
+                  class="btn-delete" 
+                  (click)="deleteTeamMember(member.id, member.name)"
+                  title="Delete member">
+            🗑️ Delete
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- UPLOAD MODAL -->
+<div class="upload-modal" [class.active]="isUploadOpen">
+  <div class="modal-backdrop" (click)="closeUploadModal()"></div>
+  <div class="modal-content">
+    <div class="modal-header">
+      <h3>Add Team Member</h3>
+      <button class="close-btn" (click)="closeUploadModal()">×</button>
+    </div>
+    <div class="modal-body">
+      <form (ngSubmit)="onUploadSubmit()">
+        
+        <div class="form-group">
+          <label>Member Name *</label>
+          <input type="text" [(ngModel)]="uploadData.name" name="name" required class="form-control" placeholder="e.g., Raj Kumar">
+        </div>
+
+        <div class="form-group">
+          <label>Position/Role *</label>
+          <input type="text" [(ngModel)]="uploadData.role" name="role" required class="form-control" placeholder="e.g., Chief Instructor, Senior Coach">
+        </div>
+
+        <div class="form-group">
+          <label>Bio/Description</label>
+          <textarea [(ngModel)]="uploadData.bio" name="bio" rows="4" class="form-control" placeholder="Enter member bio or description..."></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>Profile Photo *</label>
+          <input type="file" (change)="onFileSelected($event)" required class="form-control file-input" accept="image/*">
+        </div>
+
+        <button type="submit" class="btn-submit" [disabled]="isLoading">
+          {{ isLoading ? 'Adding...' : 'Add Member' }}
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+
+<section class="section cta-section">
+  <div class="container">
+    <div class="cta-content text-center" #animItem>
+      <h2 class="cta-title">Join Our Faculty</h2>
+      <p class="text-large">Are you a dedicated martial arts instructor? We are looking for talent.</p>
+      <div class="cta-buttons">
+        <a routerLink="/contact" class="btn btn-white">Apply Now</a>
+      </div>
+    </div>
+  </div>
+</section>

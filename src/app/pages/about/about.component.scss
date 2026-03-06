@@ -1,0 +1,165 @@
+// --- Animation Base ---
+.fade-in-up { opacity: 0; transform: translateY(40px); transition: all 0.8s ease-out; }
+.visible .fade-in-up, .visible.fade-in-up { opacity: 1; transform: translateY(0); }
+
+// --- 1. PAGE HEADER ---
+.page-header {
+  position: relative;
+  height: 450px; // Height badha di
+  display: flex; align-items: center; justify-content: center;
+  text-align: center; color: #fff; overflow: hidden; background-color: #000;
+
+  .header-bg {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    background-image: url('../../../assets/hero-bg.jpg'); 
+    background-size: cover; background-position: center; opacity: 0.5;
+    animation: zoomEffect 20s infinite alternate;
+  }
+
+  .header-overlay {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    background: linear-gradient(to bottom, rgba(0, 43, 89, 0.7), rgba(0,0,0,0.9)); z-index: 1;
+  }
+
+  .header-content {
+    position: relative; z-index: 2; max-width: 800px;
+    h1 { font-size: 4rem; font-weight: 800; text-transform: uppercase; margin-bottom: 15px; font-family: 'Oswald', sans-serif; }
+    p { font-size: 1.3rem; opacity: 0.9; letter-spacing: 1px; font-weight: 300; }
+    .text-highlight { color: var(--primary); background: #fff; padding: 0 15px; clip-path: polygon(10% 0, 100% 0, 90% 100%, 0% 100%); display: inline-block; }
+  }
+}
+
+// --- GLOBAL SECTION SPACING ---
+.section {
+  padding: 120px 0; // Increased padding from 80px to 120px
+}
+.bg-alt { background-color: var(--bg-section); }
+
+.section-header {
+  margin-bottom: 80px; // More space below title
+  .section-title { font-size: 3rem; color: var(--text-main); font-weight: 800; margin-bottom: 10px; font-family: 'Oswald', sans-serif; text-transform: uppercase; }
+  .text-highlight { color: var(--primary); }
+  .section-desc { font-size: 1.2rem; color: var(--text-light); }
+}
+
+// --- 2. ABOUT CONTENT ---
+.about-grid {
+  display: grid; grid-template-columns: 1fr 1fr; 
+  gap: 80px; // Gap badha diya taaki chipka na lage
+  align-items: center;
+  
+  @media (max-width: 992px) { grid-template-columns: 1fr; gap: 60px; }
+}
+
+.about-text {
+  .sub-heading { color: var(--accent); font-weight: 700; letter-spacing: 3px; margin-bottom: 15px; display: block; font-size: 0.95rem; }
+  h2 { font-size: 2.8rem; margin-bottom: 25px; line-height: 1.1; color: var(--text-main); font-family: 'Oswald', sans-serif; }
+  .text-primary { color: var(--primary); }
+  .lead { font-size: 1.2rem; color: var(--text-main); font-weight: 500; margin-bottom: 25px; line-height: 1.6; border-left: 4px solid var(--accent); padding-left: 20px; }
+  p { color: var(--text-light); line-height: 1.8; margin-bottom: 30px; font-size: 1.05rem; }
+
+  .mission-box {
+    display: flex; gap: 25px; background: var(--bg-section); padding: 35px; border-radius: 12px; border-left: 5px solid var(--primary);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    .mission-icon { font-size: 3rem; }
+    h3 { font-size: 1.4rem; margin-bottom: 10px; color: var(--text-main); font-weight: 700; font-family: 'Oswald', sans-serif; }
+    p { margin: 0; font-size: 1rem; line-height: 1.6; color: var(--text-light); }
+  }
+}
+
+.about-image-grid {
+  position: relative; height: 550px; // Increased height
+  
+  .img-box {
+    position: absolute; border-radius: 12px; background-size: cover; background-position: center;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.2); transition: transform 0.3s;
+    &:hover { transform: scale(1.02); z-index: 10; }
+  }
+  
+  .main-img {
+    width: 85%; height: 80%; top: 0; right: 0; z-index: 1;
+    background-color: #333;
+  }
+  
+  .sub-img {
+    width: 55%; height: 45%; bottom: 0; left: 0; z-index: 2;
+    border: 8px solid var(--bg-body); // Thicker border
+    background-color: #666;
+  }
+
+  .experience-badge {
+    position: absolute; top: 10%; left: -20px; background: var(--primary); color: #fff;
+    padding: 30px; border-radius: 50%; width: 140px; height: 140px;
+    display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;
+    z-index: 3; box-shadow: 0 15px 30px rgba(0, 86, 179, 0.4); border: 5px solid var(--bg-body);
+    
+    .years { font-size: 3rem; font-weight: 800; line-height: 1; font-family: 'Oswald', sans-serif; }
+    .label { font-size: 0.8rem; text-transform: uppercase; line-height: 1.2; font-weight: 600; }
+  }
+}
+
+// --- 3. VALUES ---
+.grid-4 {
+  display: grid; grid-template-columns: repeat(4, 1fr); 
+  gap: 40px; // More gap
+  @media (max-width: 992px) { grid-template-columns: repeat(2, 1fr); }
+  @media (max-width: 576px) { grid-template-columns: 1fr; }
+}
+
+.value-card {
+  background: var(--bg-card); padding: 40px 25px; text-align: center;
+  border-radius: 12px; border: 1px solid var(--border-light);
+  transition: 0.3s; height: 100%;
+  
+  &:hover {
+    transform: translateY(-15px); box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+    border-color: var(--primary);
+    .icon { transform: scale(1.2) rotate(10deg); }
+  }
+
+  .icon { font-size: 3.5rem; margin-bottom: 25px; transition: 0.3s; display: inline-block; }
+  h3 { color: var(--text-main); font-size: 1.4rem; margin-bottom: 15px; text-transform: uppercase; font-weight: 700; font-family: 'Oswald', sans-serif; }
+  p { color: var(--text-light); font-size: 1rem; line-height: 1.7; }
+}
+
+// --- 4. FACILITIES (Poster Style Fixed) ---
+.facilities-wrapper {
+  display: grid; 
+  grid-template-columns: repeat(3, 1fr); 
+  gap: 40px; // Proper gap
+  @media (max-width: 992px) { grid-template-columns: repeat(2, 1fr); }
+  @media (max-width: 768px) { grid-template-columns: 1fr; }
+}
+
+.facility-item {
+  position: relative; height: 400px; // Taller cards
+  border-radius: 15px; overflow: hidden;
+  display: flex; align-items: flex-end; cursor: pointer; background: #000;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+  
+  .facility-bg {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    background-size: cover; background-position: center; 
+    transition: 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+  
+  .facility-overlay {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    background: linear-gradient(to top, rgba(0,0,0,0.95), rgba(0,0,0,0.2) 60%, transparent);
+    z-index: 1;
+  }
+  
+  .facility-content {
+    position: relative; z-index: 2; padding: 30px; width: 100%;
+    
+    h3 { color: #fff; margin-bottom: 10px; font-family: 'Oswald', sans-serif; font-size: 1.8rem; text-transform: uppercase; text-shadow: 0 2px 5px rgba(0,0,0,0.5); }
+    p { color: rgba(255,255,255,0.9); font-size: 1rem; margin: 0; line-height: 1.5; opacity: 0.9; }
+  }
+
+  &:hover {
+    .facility-bg { transform: scale(1.1); }
+    box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+  }
+}
+
+@keyframes zoomEffect { 0% { transform: scale(1); } 100% { transform: scale(1.1); } }

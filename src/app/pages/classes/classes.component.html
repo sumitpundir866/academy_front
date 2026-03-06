@@ -1,0 +1,74 @@
+<!-- <section class="page-header parallax-section" data-aos="fade-up">
+  <div class="parallax-bg" style="background-image: url('assets/karate-classes-bg.jpg');"></div>
+  <div class="header-overlay"></div>
+  <div class="container header-content fade-in-up">
+    <h1 class="glitch" data-text="Our Classes">Our <span class="text-highlight">Classes</span></h1>
+    <p class="fade-in-up">Discover the perfect martial arts program for your journey.</p>
+  </div>
+</section> -->
+
+<section class="section classes-section">
+  <div class="container">
+    <div class="class-programs">
+      
+      <div class="class-card" *ngFor="let program of classPrograms" #animItem>
+        <div class="class-header">
+          <div class="header-content">
+            <span class="age-badge">{{ program.age }}</span>
+            <h2>{{ program.name }}</h2>
+          </div>
+          <div class="header-bg"></div> 
+        </div>
+        
+        <div class="class-details">
+          
+          <div class="class-info">
+            <div class="info-item">
+              <span class="icon">⏱️</span>
+              <span class="label">Duration</span>
+              <strong>{{ program.duration }}</strong>
+            </div>
+            <div class="info-item">
+              <span class="icon">📅</span>
+              <span class="label">Schedule</span>
+              <strong>{{ program.schedule }}</strong>
+            </div>
+            <div class="info-item">
+              <span class="icon">🏷️</span>
+              <span class="label">Price</span>
+              <strong>{{ program.price }}</strong>
+            </div>
+          </div>
+          
+          <p class="class-description">{{ program.description }}</p>
+          
+          <div class="class-benefits">
+            <h4>Key Benefits</h4>
+            <ul>
+              <li *ngFor="let benefit of program.benefits">
+                <span class="check">✓</span> {{ benefit }}
+              </li>
+            </ul>
+          </div>
+          
+          <div class="class-actions">
+            <a routerLink="/contact" class="btn btn-primary btn-block">Enroll Now</a>
+            </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="section cta-section">
+  <div class="container">
+    <div class="cta-content text-center" #animItem>
+      <h2 class="cta-title">Ready to Start Your Journey?</h2>
+      <p class="text-large">Join our martial arts family today and transform your life!</p>
+      <div class="cta-buttons">
+        <a routerLink="/contact" class="btn btn-white">Get Started Today</a>
+      </div>
+    </div>
+  </div>
+</section>

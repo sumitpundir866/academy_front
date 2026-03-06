@@ -1,0 +1,54 @@
+<header class="header" [class.scrolled]="isScrolled">
+  <div class="container">
+    <nav class="navbar">
+      
+      <div class="nav-brand">
+        <a routerLink="/" class="brand-link">
+          <div class="logo-container">
+            <img src="assets/sports-academy-logo.png.jpg" alt="Sports Academy" class="logo-image">
+          </div>
+        </a>
+      </div>
+
+      <div class="nav-menu" [class.active]="isMenuOpen">
+        <ul class="nav-list">
+          <li class="nav-item"><a routerLink="/" class="nav-link" (click)="closeMenu()">Home</a></li>
+          <li class="nav-item"><a routerLink="/about" class="nav-link" (click)="closeMenu()">About</a></li>
+          <li class="nav-item"><a routerLink="/classes" class="nav-link" (click)="closeMenu()">Classes</a></li>
+          <li class="nav-item"><a routerLink="/team" class="nav-link" (click)="closeMenu()">Team</a></li>
+          <li class="nav-item"><a routerLink="/gallery" class="nav-link" (click)="closeMenu()">Gallery</a></li>
+          <li class="nav-item"><a routerLink="/contact" class="nav-link" (click)="closeMenu()">Contact</a></li>
+        </ul>
+
+        <button class="theme-toggle" (click)="toggleTheme()" title="Switch Theme">
+          <svg *ngIf="isDarkMode" class="icon sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+          
+          <svg *ngIf="!isDarkMode" class="icon moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </button>
+
+        <div class="cta-container">
+          <a routerLink="/contact" class="cta-btn">Book Trial</a>
+        </div>
+      </div>
+
+      <div class="nav-toggle" [class.active]="isMenuOpen" (click)="toggleMenu()">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </div>
+
+    </nav>
+  </div>
+</header>

@@ -1,0 +1,115 @@
+<!-- <section class="page-header parallax-section" data-aos="fade-up">
+  <div class="parallax-bg" style="background-image: url('assets/contact-karate-bg.jpg');"></div>
+  <div class="header-overlay"></div>
+  <div class="container header-content fade-in-up">
+    <h1 class="glitch" data-text="Get in Touch">Get in <span class="text-highlight">Touch</span></h1>
+    <p class="fade-in-up">Start your journey to excellence today. We are here to help.</p>
+  </div>
+</section> -->
+
+<section class="section contact-section">
+  <div class="container">
+    <div class="contact-grid">
+      
+      <div class="info-wrapper" #animItem>
+        <span class="sub-heading">CONTACT US</span>
+        <h2>We'd love to <span class="text-primary">hear from you</span></h2>
+        <p class="desc">Whether you're interested in joining our classes or have questions about our programs, our team is ready to assist you.</p>
+
+        <div class="info-cards">
+          
+          <div class="info-card">
+            <div class="icon-box">📍</div>
+            <div class="info-text">
+              <h3>Visit Us</h3>
+              <p>Sports Academy & Welfare Association of India<br>Salem, Tamil Nadu, India</p>
+            </div>
+          </div>
+
+          <div class="info-card">
+            <div class="icon-box">📞</div>
+            <div class="info-text">
+              <h3>Call Us</h3>
+              <p><a href="tel:+919876543210">+91 98765 43210</a></p>
+              <p class="sub-text">Mon-Sat, 9am - 7pm</p>
+            </div>
+          </div>
+
+          <div class="info-card">
+            <div class="icon-box">✉️</div>
+            <div class="info-text">
+              <h3>Email Us</h3>
+              <p><a href="mailto:info@indiansportsacademy.com">info&#64;indiansportsacademy.com</a></p>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="social-connect">
+          <span>Follow Us:</span>
+          <div class="social-icons">
+            <a href="#" class="s-icon">FB</a>
+            <a href="#" class="s-icon">IG</a>
+            <a href="#" class="s-icon">YT</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="form-wrapper" #animItem>
+        <div class="form-header">
+          <h3>Send a Message</h3>
+        </div>
+        <form class="contact-form" (ngSubmit)="onSubmit()">
+          <input type="checkbox" name="botcheck" style="display:none" tabindex="-1" autocomplete="off">
+          
+          <div class="form-group">
+            <label for="name">Full Name</label>
+            <input type="text" id="name" name="name" placeholder="John Doe" [(ngModel)]="contactForm.name" required class="form-control">
+          </div>
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label for="email">Email Address</label>
+              <input type="email" id="email" name="email" placeholder="john@example.com" [(ngModel)]="contactForm.email" required class="form-control">
+            </div>
+            <div class="form-group">
+              <label for="phone">Phone Number</label>
+              <input type="tel" id="phone" name="phone" placeholder="+91..." [(ngModel)]="contactForm.phone" class="form-control">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="classInterest">Interested Program</label>
+            <select id="classInterest" name="classInterest" [(ngModel)]="contactForm.classInterest" class="form-control">
+              <option value="">Select a Program</option>
+              <option value="excellent-kids">Excellent Kids (4-6 Yrs)</option>
+              <option value="kids-karate">Kid's Karate (7-12 Yrs)</option>
+              <option value="teens-adults">Teens & Adults (13+)</option>
+              <option value="general">General Inquiry</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" rows="4" placeholder="How can we help you?" [(ngModel)]="contactForm.message" required class="form-control"></textarea>
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary btn-block" [disabled]="isSubmitting">
+              {{ isSubmitting ? 'Sending...' : 'Send Message' }}
+            </button>
+            <p class="form-status" *ngIf="submitStatus">{{ submitStatus }}</p>
+          </div>
+        </form>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="map-section">
+  <iframe 
+    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3907.686944726562!2d78.14601431478672!3d11.65373799172837!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3babf1ccf52cba0b%3A0xee9989007068ca06!2sSalem%2C%20Tamil%20Nadu!5e0!3m2!1sen!2sin!4v1645428456789!5m2!1sen!2sin" 
+    width="100%" height="450" style="border:0;" allowfullscreen="" loading="lazy">
+  </iframe>
+</section>

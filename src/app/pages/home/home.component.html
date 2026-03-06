@@ -1,0 +1,110 @@
+<section class="hero">
+  <div class="hero-overlay"></div>
+  <div class="hero-bg-image"></div>
+  
+  <div class="container hero-container">
+    <div class="hero-content" #animItem>
+      
+      <div class="logo-badge fade-in-up">
+        <img src="../../../assets/tkd-logo-white.png" alt="Logo" class="hero-logo"
+             onerror="this.style.display='none'">
+      </div>
+
+      <h1 class="hero-title fade-in-up delay-1">
+        UNLEASH YOUR <br> <span class="highlight-text">INNER WARRIOR</span>
+      </h1>
+      
+      <div class="hero-subtitle fade-in-up delay-2">
+        <p class="org-name">Sports Academy & Welfare Association of India</p>
+        <p class="secretary-name">Satendra Kumar - General Secretary</p>
+      </div>
+
+      <div class="hero-buttons fade-in-up delay-3">
+        <a routerLink="/classes" class="btn btn-primary">Start Training</a>
+        <a routerLink="/contact" class="btn btn-outline">Contact Us</a>
+      </div>
+    </div>
+  </div>
+  
+  <div class="scroll-indicator">
+    <span>Scroll</span>
+    <div class="arrow"></div>
+  </div>
+</section>
+
+<section class="stats-strip">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat-item">
+        <span class="stat-number">500+</span>
+        <span class="stat-label">Students</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-number">50+</span>
+        <span class="stat-label">Black Belts</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-number">15+</span>
+        <span class="stat-label">Years Exp</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section features-section">
+  <div class="container">
+    <div class="section-header text-center" #animItem>
+      <h2 class="section-title">Why <span class="text-highlight">Choose Us?</span></h2>
+      <p class="section-desc">Building character, discipline, and strength.</p>
+    </div>
+
+    <div class="grid grid-3">
+      <div class="card feature-card" *ngFor="let feature of features; let i = index" #animItem [style.transition-delay]="i * 100 + 'ms'">
+        <div class="feature-icon-box">
+          <span class="emoji-icon">{{ feature.emoji }}</span>
+        </div>
+        <h3>{{ feature.title }}</h3>
+        <p>{{ feature.description }}</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section classes-section">
+  <div class="container">
+    <div class="section-header text-center" #animItem>
+      <h2 class="section-title">Our <span class="text-highlight">Training Programs</span></h2>
+      <p class="section-desc">Classes designed for every age and skill level.</p>
+    </div>
+
+    <div class="grid grid-3">
+      <div class="class-card" *ngFor="let classItem of classes; let i = index" #animItem [style.transition-delay]="i * 100 + 'ms'">
+        
+        <div class="card-bg" [style.background-image]="'url(' + classItem.image + ')'"></div>
+        
+        <div class="card-overlay"></div>
+        
+        <span class="age-badge">{{ classItem.age }}</span>
+        
+        <div class="card-content">
+          <h3>{{ classItem.name }}</h3>
+          <p>{{ classItem.description }}</p>
+          <a routerLink="/classes" class="link-btn">View Details <span>&rarr;</span></a>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section cta-section">
+  <div class="container">
+    <div class="cta-content text-center" #animItem>
+      <h2 class="cta-title">Ready to Start?</h2>
+      <p class="text-large">Join us today and transform your life.</p>
+      <div class="cta-buttons">
+        <a routerLink="/contact" class="btn btn-white">Book First Class</a>
+      </div>
+    </div>
+  </div>
+</section>
