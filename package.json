@@ -2,23 +2,17 @@
 
   "engines": {
 
-    "node": "22.x"
+    "node": "18.x"
 
   },
 
   "scripts": {
-
-    "ng": "ng",
-
-    "start": "ng serve",
-
-    "build": "ng build --configuration production",
-
-    "watch": "ng build --watch --configuration development",
-
-    "test": "ng test"
-
-  },
+  "ng": "ng",
+  "start": "ng serve",
+  "build": "ng build --configuration production --no-watch --verbose",
+  "watch": "ng build --watch --configuration development",
+  "test": "ng test"
+},
 
   "private": true,
 
