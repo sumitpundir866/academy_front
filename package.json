@@ -9,7 +9,7 @@
   "scripts": {
   "ng": "ng",
   "start": "ng serve",
-  "build": "ng build --configuration production --no-budget",
+  "build":  "ng build --configuration production",
   "watch": "ng build --watch --configuration development",
   "test": "ng test"
 },
